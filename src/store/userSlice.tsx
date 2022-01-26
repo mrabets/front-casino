@@ -3,7 +3,7 @@ import {IUserSliceState} from '../types/data'
 
 const initialState: IUserSliceState = {
   user_id: localStorage.getItem('user_id') ? localStorage.getItem('user_id') : null,
-  email: null,
+  email: localStorage.getItem('email') ? localStorage.getItem('email') : null,
   token: localStorage.getItem('token') ? localStorage.getItem('token') : null ,
 }
 
@@ -17,6 +17,7 @@ const userSlice = createSlice({
       state.token = action.payload.token;
 
       localStorage.setItem("user_id", state.user_id || '')
+      localStorage.setItem("email", state.email || '')
       localStorage.setItem("token", state.token || '')
     },
     removeUser(state) {
@@ -25,6 +26,7 @@ const userSlice = createSlice({
       state.token = null;
 
       localStorage.removeItem("user_id")
+      localStorage.removeItem("email")
       localStorage.removeItem("token")
     }
   }

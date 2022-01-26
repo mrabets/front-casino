@@ -24,7 +24,11 @@ const Navbar = () => {
 
         { isAuth ? ( 
         
-          <div className="nav-btn d-flex">          
+          <div className="nav-btn d-flex">
+            <Link to="/profile" className='profile btn btn-dark'>
+              Profile  
+            </Link>
+
             <button onClick={onLogOut} className="btn btn-outline-primary me-2">
               Log Out
             </button>

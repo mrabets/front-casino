@@ -4,6 +4,7 @@ import './App.css';
 
 import {SignIn} from './Pages/SignIn';
 import {SignUp} from './Pages/SignUp';
+import {Profile} from './Pages/Profile';
 import {Homepage} from './Pages/Homepage';
 import {NotFound} from './Pages/NotFound';
 import {Layout} from './Layout/Layout';
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             </>
           }
           <Route path="*" element={<NotFound />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>
