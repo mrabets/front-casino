@@ -7,10 +7,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useAuth } from "../hooks/use-auth";
 
-export const PaymentForm = () => {
+export const PaymentForm = (props) => {
   const stripe = useStripe()
   const elements = useElements()
-  const [amount, setAmount] = useState(0)
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,7 +28,7 @@ export const PaymentForm = () => {
         const response = await axios
         .post(process.env.REACT_APP_API_URL + '/api/v1/payment/create',
           {
-            amount: 999,
+            amount: props.amount,
             payment_id: id,
           }
         );
@@ -43,7 +42,7 @@ export const PaymentForm = () => {
     }
   };
 
-  return (
+  return (  
     <div className="Own-form">
       <form onSubmit={handleSubmit} style={{ maxWidth: 700 }}>
         <CardElement />

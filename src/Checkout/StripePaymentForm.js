@@ -7,8 +7,8 @@ import {
 
 const stripePromise = loadStripe("pk_test_51KLkAMDdXO9Fb87CsaPmEiGHY1JCejsj4jLvckFMRfM8CEJPHtYWVpQqb42XLPHZ7pbYFHolZtYFqMIL0shqDwNt007evvQO7L");
 
-export const StripePaymentForm = () => (
+export const StripePaymentForm = (props) => (
   <Elements stripe={stripePromise}>
-    <PaymentForm />
+    <PaymentForm amount={props.amount}/>
   </Elements>
 );

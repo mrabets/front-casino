@@ -26,6 +26,10 @@
   margin-top: 30px;
 }
 
+.Email, .Balance  {
+  margin-bottom: 50px;
+}
+
 .Own-form {
   margin-left: auto;
   margin-right: auto;
