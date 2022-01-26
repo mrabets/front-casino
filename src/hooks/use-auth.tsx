@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import type { RootState, AppDispatch } from '../store/store'
+import type { RootState } from '../store/store'
 
 export function useAuth() {
   const {user_id, email, token} = useSelector((state: RootState) => state.user)

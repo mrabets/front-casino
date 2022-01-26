@@ -7,14 +7,6 @@ import axios from 'axios';
 
 import { setUser } from '../store/userSlice'
 
-type IError = {
-  response: {
-    data: {
-      error: string
-    }
-  }
-}
-
 export function SignIn() {
   const { 
     register, 

@@ -9,6 +9,8 @@ import {Homepage} from './Pages/Homepage';
 import {NotFound} from './Pages/NotFound';
 import {Layout} from './Layout/Layout';
 import { useAuth } from './hooks/use-auth';
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_51KLkAMDdXO9Fb87CsaPmEiGHY1JCejsj4jLvckFMRfM8CEJPHtYWVpQqb42XLPHZ7pbYFHolZtYFqMIL0shqDwNt007evvQO7L");
 
 const App: React.FC = () => {
   const {isAuth} = useAuth()
