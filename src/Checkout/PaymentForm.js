@@ -10,6 +10,7 @@ import { useAuth } from "../hooks/use-auth";
 export const PaymentForm = (props) => {
   const stripe = useStripe()
   const elements = useElements()
+  const user_id = useAuth().user_id
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,6 +29,7 @@ export const PaymentForm = (props) => {
         const response = await axios
         .post(process.env.REACT_APP_API_URL + '/api/v1/payment/create',
           {
+            user_id: user_id,
             amount: props.amount,
             payment_id: id,
           }
