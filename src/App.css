@@ -27,8 +27,8 @@
 }
 
 .Balance  {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 .Games {
@@ -37,6 +37,17 @@
 
 .Bet-buttons {
   margin-top: 2rem;
+}
+
+.Wheel {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Spin {
+  margin-top: 20px;
 }
 
 .Red-button {
