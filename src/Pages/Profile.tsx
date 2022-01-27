@@ -14,11 +14,11 @@ export const Profile = () => {
   const [isUpdate, setUpdate] = useState<boolean>(true)
 
   useEffect(() => {
-    getAmount()
+    getBalance()
     setUpdate(false)
   }, [isUpdate])
 
-  const getAmount = async () => {
+  const getBalance = async () => {
     try {
       const response = await axios
         .get(process.env.REACT_APP_API_URL + `/api/v1/users/${user.user_id}/balance`)
@@ -34,9 +34,8 @@ export const Profile = () => {
   return (
     <>
       <div className="p-3 pb-md-4 mx-auto text-center">
-        <h1 className="Email display-6 fw-normal">{user.email}</h1>
         <h1 className="Balance display-3 fw-normal">{balance}$</h1>
-        <p className="fs-5 text-muted">
+        <p className="Balance fs-5 text-muted">
           You can top up your account here 
         </p>
 
@@ -48,7 +47,7 @@ export const Profile = () => {
       </div>
 
      
-      <StripePaymentForm amount={amount}/>
+      <StripePaymentForm amount={amount} getBalance={getBalance}/>
     </>
   )
 }

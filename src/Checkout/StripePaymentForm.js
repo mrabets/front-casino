@@ -9,6 +9,6 @@ const stripePromise = loadStripe("pk_test_51KLkAMDdXO9Fb87CsaPmEiGHY1JCejsj4jLvc
 
 export const StripePaymentForm = (props) => (
   <Elements stripe={stripePromise}>
-    <PaymentForm amount={props.amount}/>
+    <PaymentForm amount={props.amount} getBalance={props.getBalance}/>
   </Elements>
 );

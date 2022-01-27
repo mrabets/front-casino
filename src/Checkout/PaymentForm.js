@@ -11,6 +11,7 @@ export const PaymentForm = (props) => {
   const stripe = useStripe()
   const elements = useElements()
   const user_id = useAuth().user_id
+  const [api_errors, setApiErrors] = useState('');
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,8 +37,12 @@ export const PaymentForm = (props) => {
         );
 
         console.log("Stripe 35 | data", response.data.message);
-      } catch (error) {
-        console.log("CheckoutForm.js 28 | ", error);
+
+        props.getBalance()
+
+        setApiErrors('')
+      } catch (e) {
+        setApiErrors(e.response.data.error)
       }
     } else {
       console.log(error);
@@ -47,6 +52,9 @@ export const PaymentForm = (props) => {
   return (  
     <div className="Own-form">
       <form onSubmit={handleSubmit} style={{ maxWidth: 700 }}>
+        <label className="Error-label">
+          {api_errors}
+        </label>
         <CardElement />
         <button className="Pay-button btn btn-primary">
           Pay
