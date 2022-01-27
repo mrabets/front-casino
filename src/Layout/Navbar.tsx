@@ -19,7 +19,7 @@ const Navbar = () => {
       <nav className="navbar">
         
         <Link to="/" className="App-logo">
-          Legal Casino
+          Crypto Casino
         </Link>
 
         { isAuth ? ( 

@@ -5,6 +5,8 @@ import './App.css';
 import {SignIn} from './Pages/SignIn';
 import {SignUp} from './Pages/SignUp';
 import {Profile} from './Pages/Profile';
+import {LiteGame} from './Games/LiteGame';
+import {HardGame} from './Games/HardGame';
 import {Homepage} from './Pages/Homepage';
 import {NotFound} from './Pages/NotFound';
 import {Layout} from './Layout/Layout';
@@ -29,6 +31,8 @@ const App: React.FC = () => {
           }
           <Route path="*" element={<NotFound />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="lite_game" element={<LiteGame />} />
+          <Route path="hard_game" element={<HardGame />} />
         </Route>
       </Routes>
     </div>
