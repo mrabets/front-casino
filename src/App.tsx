@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 
 import {SignIn} from './Pages/SignIn';
@@ -11,7 +11,9 @@ import {Homepage} from './Pages/Homepage';
 import {NotFound} from './Pages/NotFound';
 import {Layout} from './Layout/Layout';
 import { useAuth } from './hooks/use-auth';
+import {PrivateRoutes} from './PrivateRoutes';
 import { loadStripe } from "@stripe/stripe-js";
+
 const stripePromise = loadStripe("pk_test_51KLkAMDdXO9Fb87CsaPmEiGHY1JCejsj4jLvckFMRfM8CEJPHtYWVpQqb42XLPHZ7pbYFHolZtYFqMIL0shqDwNt007evvQO7L");
 
 const App: React.FC = () => {
@@ -30,9 +32,13 @@ const App: React.FC = () => {
             </>
           }
           <Route path="*" element={<NotFound />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="lite_game" element={<LiteGame />} />
-          <Route path="hard_game" element={<HardGame />} />
+
+          <Route element={<PrivateRoutes />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="lite_game" element={<LiteGame />} />
+            <Route path="hard_game" element={<HardGame />} />   
+          </Route>
+
         </Route>
       </Routes>
     </div>

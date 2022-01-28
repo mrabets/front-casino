@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'react';
 import { MdCasino } from 'react-icons/md';
+import { useAuth } from "../hooks/use-auth"
 import { BsFillPlayCircleFill } from 'react-icons/bs';
 import { Wheel } from 'react-custom-roulette'
 import {getRouletteData} from '../custom/getRouletteData'
+import axios from "axios";
 
 let rouletteData = null
 
 export const LiteGame = () => {
+  const user = useAuth()
   const [betAmount, setBetAmount] = useState(0)
-  const [token, setToken] = useState('')
+  const [tokenColor, setToken] = useState('')
 
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   rouletteData = rouletteData || getRouletteData()
 
-  useEffect(() => {
-    calculatePrize()
-  }, [prizeNumber]);
-
   const handleSpinClick = async () => {
-    if (token) {
+    if (tokenColor) {
       const newPrizeNumber = Math.floor(Math.random() * rouletteData.length)
       setPrizeNumber(newPrizeNumber)
       setMustSpin(true)
@@ -29,10 +28,29 @@ export const LiteGame = () => {
   const calculatePrize = () => {
     const score = Number(rouletteData[prizeNumber].option)
     const prizeColor = rouletteData[prizeNumber].style.backgroundColor
-    
-    console.log(score)
-    console.log(prizeColor)
-    // betAmount * Number(rouletteData[prizeNumber].style)
+  
+    const finalResult = betAmount * score
+
+    if (prizeColor == tokenColor) {
+      updateBalance(finalResult, false)
+    } else {
+      updateBalance(finalResult, true)
+    }
+  }
+
+  const updateBalance = async (finalResult, isSpending) => {
+    try {
+      const response = await axios
+      .put(process.env.REACT_APP_API_URL + '/api/v1/payment/update',
+        {
+          user_id: user.user_id,
+          amount: finalResult,
+          spending: isSpending,
+        }
+      );
+    } catch (e) {
+      console.log(e.response)
+    }
   }
 
   return (
