@@ -1,11 +1,11 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {IUserSliceState} from '../types/data'
+import { createSlice } from '@reduxjs/toolkit';
+import { IUserSliceState } from '../types/data';
 
 const initialState: IUserSliceState = {
   user_id: localStorage.getItem('user_id') ? localStorage.getItem('user_id') : null,
   email: localStorage.getItem('email') ? localStorage.getItem('email') : null,
-  token: localStorage.getItem('token') ? localStorage.getItem('token') : null ,
-}
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : null
+};
 
 const userSlice = createSlice({
   name: 'user',
@@ -16,22 +16,22 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.token;
 
-      localStorage.setItem("user_id", state.user_id || '')
-      localStorage.setItem("email", state.email || '')
-      localStorage.setItem("token", state.token || '')
+      localStorage.setItem('user_id', state.user_id || '');
+      localStorage.setItem('email', state.email || '');
+      localStorage.setItem('token', state.token || '');
     },
     removeUser(state) {
       state.user_id = null;
       state.email = null;
       state.token = null;
 
-      localStorage.removeItem("user_id")
-      localStorage.removeItem("email")
-      localStorage.removeItem("token")
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('email');
+      localStorage.removeItem('token');
     }
   }
-})
+});
 
-export const {setUser, removeUser} = userSlice.actions
+export const { setUser, removeUser } = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;

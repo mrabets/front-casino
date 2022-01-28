@@ -1,56 +1,50 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import { useDispatch } from 'react-redux';
-import { removeUser } from '../store/userSlice'
+import { removeUser } from '../store/userSlice';
 
 const Navbar = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const {isAuth} = useAuth()
+  const { isAuth } = useAuth();
 
   const onLogOut = () => {
     dispatch(removeUser());
-    navigate('/', {replace: true})
-  }
+    navigate('/', { replace: true });
+  };
 
   return (
     <div className="container">
       <nav className="navbar">
-        
         <Link to="/" className="App-logo">
           Crypto Casino
         </Link>
 
-        { isAuth ? ( 
-        
+        {isAuth ? (
           <div className="nav-btn d-flex">
-            <Link to="/profile" className='profile btn btn-dark'>
-              Profile  
+            <Link to="/profile" className="profile btn btn-dark">
+              Profile
             </Link>
 
             <button onClick={onLogOut} className="btn btn-outline-primary me-2">
               Log Out
             </button>
           </div>
-    
-         
-          ) : (
+        ) : (
+          <div className="nav-btn d-flex">
+            <Link to="/sign_up" className="btn btn-outline-primary me-2">
+              Sign Up
+            </Link>
 
-            <div className="nav-btn d-flex">
-              <Link to="/sign_up" className="btn btn-outline-primary me-2">
-                Sign Up
-              </Link>
-
-              <Link to="/sign_in" className="btn btn-primary">
-                Sign In
-              </Link>
-            </div>
-          )
-        }      
+            <Link to="/sign_in" className="btn btn-primary">
+              Sign In
+            </Link>
+          </div>
+        )}
       </nav>
     </div>
-  )
+  );
 };
 
 export default Navbar;

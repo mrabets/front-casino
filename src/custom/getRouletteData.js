@@ -23,26 +23,28 @@ let rowData = [
 
 export function getRouletteData() {
   const getShuffleOptions = () => {
-    let options = []
+    let options = [];
 
     rowData.forEach((obj) => {
-      options.push(obj.option)
-    })
+      options.push(obj.option);
+    });
 
-    return options.sort(() => { return .5 - Math.random(); })
-  }
+    return options.sort(() => {
+      return 0.5 - Math.random();
+    });
+  };
 
   const replaceOptions = (newOptions) => {
     for (let i = 0; i < rowData.length; i++) {
-      rowData[i].option = newOptions[i] 
+      rowData[i].option = newOptions[i];
     }
-  }
+  };
 
   const shuffleData = () => {
-    replaceOptions(getShuffleOptions())
+    replaceOptions(getShuffleOptions());
 
-    return rowData
-  }
+    return rowData;
+  };
 
   return shuffleData();
 }
