@@ -5,26 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 
-import { setUser } from '../store/userSlice'
-
-type IError = {
-  response: {
-    data: {
-      error: string
-    }
-  }
-}
+import { setUser } from '../store/userSlice';
 
 export function SignIn() {
-  const { 
-    register, 
+  const {
+    register,
     handleSubmit,
     formState: { errors }
   } = useForm({
-    mode: "onBlur"
+    mode: 'onBlur'
   });
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -32,65 +24,65 @@ export function SignIn() {
 
   const onSubmit = async () => {
     try {
-      const response = await axios
-        .post(process.env.REACT_APP_API_URL + '/users/sign_in', {
-          user: {
-            email,
-            password
-          },
-        })
-      
-      const data = response.data
+      const response = await axios.post(process.env.REACT_APP_API_URL + '/users/sign_in', {
+        user: {
+          email,
+          password
+        }
+      });
 
-      dispatch(setUser({
-        id: data.user.id,
-        email: data.user.email,
-        token: data.token
-      }))
-      
-      navigate('/', {replace: true})
+      const data = response.data;
+
+      dispatch(
+        setUser({
+          id: data.user.id,
+          email: data.user.email,
+          token: data.token
+        })
+      );
+
+      navigate('/', { replace: true });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
-      setApiErrors(e.response.data.error)
+      setApiErrors(e.response.data.error);
     }
-  } 
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} className="Own-form">
-      <Form.Group className="Error-label">
-        {api_errors}
-      </Form.Group>
-    
+      <Form.Group className="Error-label">{api_errors}</Form.Group>
+
       <Form.Group className="mb-3">
         <Form.Label className="form-label">Email</Form.Label>
         <Form.Control
-          {...register("email", {
-            required: true,
+          {...register('email', {
+            required: true
           })}
           type="email"
           name="email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           className="form-control"
         />
         <Form.Group className="Error-label">
-          {errors?.email?.type === "required" && <p>This field is required</p>}
+          {errors?.email?.type === 'required' && <p>This field is required</p>}
         </Form.Group>
       </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label className="form-label">Password</Form.Label>
         <Form.Control
-          {...register("password", {
-            required: true,
+          {...register('password', {
+            required: true
           })}
           type="password"
           name="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           className="form-control"
         />
         <Form.Group className="Error-label">
-          {errors?.password?.type === "required" && <p>This field is required</p>}
+          {errors?.password?.type === 'required' && <p>This field is required</p>}
         </Form.Group>
       </Form.Group>
 

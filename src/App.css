@@ -11,6 +11,9 @@
   margin-right: 15px;
 }
 
+.profile {
+  margin-right: 10px;
+}
 
 .App-logo {
   font-family: 'Romanesco', sans-serif;
@@ -19,33 +22,66 @@
   text-decoration:none;
 }
 
+.Pay-button {
+  margin-top: 30px;
+}
+
+.Balance  {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.Games {
+  margin-top: 10%;
+}
+
+.Bet-buttons {
+  margin-top: 2rem;
+}
+
+.Wheel {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Spin {
+  margin-top: 20px;
+}
+
+.Red-button {
+  margin-right: 25px;
+}
+
+.Dark-button {
+  margin-left: 25px;
+}
+
 .Own-form {
   margin-left: auto;
   margin-right: auto;
   width: 18em;
-}
-
-.Photo-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-column-gap: 0px;
-  grid-row-gap: 4rem;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-  justify-items: center;
-}
-
-.card-img-top {
-  min-width: 190px;
-  max-width: 200px;
-  min-height: 190px;
-  max-height: 200px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .Error-label {
   color:darkred;
   margin-top: 10px;
   margin-bottom: 2rem;
+}
+
+.Result-message {
+  margin-bottom: 10px;
+}
+
+.Win-message {
+  color: green;
+}
+
+.Lose-message {
+  color: red;
 }
 
 .card-text {
