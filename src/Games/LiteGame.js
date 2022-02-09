@@ -6,55 +6,45 @@ import { Wheel } from 'react-custom-roulette';
 import { getRouletteData } from '../custom/getRouletteData';
 import axios from 'axios';
 
-let rouletteData = null;
-
 export const LiteGame = () => {
   const user = useAuth();
   const [betAmount, setBetAmount] = useState(0);
   const [tokenColor, setToken] = useState('');
 
   const [mustSpin, setMustSpin] = useState(false);
-  const [prizeNumber, setPrizeNumber] = useState(-1);
-  rouletteData = rouletteData || getRouletteData();
+  const [prizeIndex, setPrizeIndex] = useState(-1);
+  const rouletteData = getRouletteData();
+
+  const [winMessage, setWinMessage] = useState('');
+  const [loseMessage, setLoseMessage] = useState('');
+  const [resultScore, setResultScore] = useState(-1);
+  const [resultTokenColor, setResultTokenColor] = useState('');
 
   useEffect(() => {
-    if (prizeNumber !== -1) {
+    if (prizeIndex !== -1 && resultTokenColor) {
+      setWinMessage('');
+      setLoseMessage('');
       setMustSpin(true);
-      calculatePrize();
     }
-  }, [prizeNumber]);
+  }, [prizeIndex]);
 
   const handleSpinClick = async () => {
     if (tokenColor) {
-      const newPrizeNumber = Math.floor(Math.random() * rouletteData.length);
-      setPrizeNumber(newPrizeNumber);
-    }
-  };
+      try {
+        // eslint-disable-next-line no-undef
+        const response = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/roulette', {
+          user_id: user.user_id,
+          bet_amount: betAmount,
+          bet_color: tokenColor
+        });
 
-  const calculatePrize = () => {
-    const score = Number(rouletteData[prizeNumber].option);
-    const prizeColor = rouletteData[prizeNumber].style.backgroundColor;
-    const finalResult = betAmount * score;
+        setResultScore(response.data.prize_score * betAmount);
+        setResultTokenColor(response.data.color);
 
-    if (prizeColor === tokenColor) {
-      updateBalance(finalResult, false);
-    } else {
-      updateBalance(finalResult, true);
-    }
-  };
-
-  const updateBalance = async (finalResult, isSpending) => {
-    try {
-      // eslint-disable-next-line no-undef
-      const response = await axios.put(process.env.REACT_APP_API_URL + '/api/v1/payment/update', {
-        user_id: user.user_id,
-        amount: finalResult,
-        spending: isSpending
-      });
-
-      console.log(response);
-    } catch (e) {
-      console.log(e.response);
+        setPrizeIndex(response.data.prize_index);
+      } catch (e) {
+        console.log(e.response);
+      }
     }
   };
 
@@ -91,13 +81,24 @@ export const LiteGame = () => {
           <BsFillPlayCircleFill size={50} />
         </button>
 
+        <div className="Result-message">
+          <h2 className="Win-message">{winMessage}</h2>
+          <h2 className="Lose-message">{loseMessage}</h2>
+        </div>
+
         <div className="Wheel">
           <Wheel
             mustStartSpinning={mustSpin}
-            prizeNumber={prizeNumber}
+            prizeNumber={prizeIndex}
             data={rouletteData}
             onStopSpinning={() => {
               setMustSpin(false);
+
+              if (tokenColor === resultTokenColor) {
+                setWinMessage(`You win ${resultScore}$`);
+              } else {
+                setLoseMessage(`You lose ${resultScore}$`);
+              }
             }}
             fontSize="30"
             innerRadius="1"

@@ -22,29 +22,32 @@ let rowData = [
 ];
 
 export function getRouletteData() {
-  const getShuffleOptions = () => {
-    let options = [];
+  // eslint-disable-next-line no-debugger
+  return rowData;
 
-    rowData.forEach((obj) => {
-      options.push(obj.option);
-    });
+  // const getShuffleOptions = () => {
+  //   let options = [];
 
-    return options.sort(() => {
-      return 0.5 - Math.random();
-    });
-  };
+  //   rowData.forEach((obj) => {
+  //     options.push(obj.option);
+  //   });
 
-  const replaceOptions = (newOptions) => {
-    for (let i = 0; i < rowData.length; i++) {
-      rowData[i].option = newOptions[i];
-    }
-  };
+  //   return options.sort(() => {
+  //     return 0.5 - Math.random();
+  //   });
+  // };
 
-  const shuffleData = () => {
-    replaceOptions(getShuffleOptions());
+  // const replaceOptions = (newOptions) => {
+  //   for (let i = 0; i < rowData.length; i++) {
+  //     rowData[i].option = newOptions[i];
+  //   }
+  // };
 
-    return rowData;
-  };
+  // const shuffleData = () => {
+  //   replaceOptions(getShuffleOptions());
 
-  return shuffleData();
+  //   return rowData;
+  // };
+
+  // return shuffleData();
 }

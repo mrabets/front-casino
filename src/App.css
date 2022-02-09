@@ -72,6 +72,18 @@
   margin-bottom: 2rem;
 }
 
+.Result-message {
+  margin-bottom: 10px;
+}
+
+.Win-message {
+  color: green;
+}
+
+.Lose-message {
+  color: red;
+}
+
 .card-text {
   text-align: center;
 }

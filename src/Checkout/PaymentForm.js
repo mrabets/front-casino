@@ -27,10 +27,12 @@ export const PaymentForm = (props) => {
           // eslint-disable-next-line no-undef
           process.env.REACT_APP_API_URL + '/api/v1/payment/create',
           {
-            user_id: user_id,
-            // eslint-disable-next-line react/prop-types
-            amount: props.amount,
-            payment_id: id
+            payment: {
+              user_id: user_id,
+              // eslint-disable-next-line react/prop-types
+              amount: props.amount,
+              payment_id: id
+            }
           }
         );
 
