@@ -9,7 +9,7 @@ import axios from 'axios';
 export const LiteGame = () => {
   const user = useAuth();
   const [betAmount, setBetAmount] = useState(0);
-  const [tokenColor, setToken] = useState('');
+  const [tokenColor, setTokenColor] = useState('');
 
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeIndex, setPrizeIndex] = useState(-1);
@@ -64,13 +64,13 @@ export const LiteGame = () => {
         </div>
         <div className="Bet-buttons">
           <button
-            onClick={() => setToken('red')}
+            onClick={() => setTokenColor('red')}
             type="button"
             className="Red-button btn btn-danger">
             <MdCasino size={50} />
           </button>
           <button
-            onClick={() => setToken('black')}
+            onClick={() => setTokenColor('black')}
             type="button"
             className="Dark-button btn btn-dark">
             <MdCasino size={50} />
